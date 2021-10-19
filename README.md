@@ -1,4 +1,4 @@
-This fork is based on NPoco 3.9.1 and supports OleDb such as Excel,Access and so on.
+This fork is based on NPoco 3.9.1 and supports OleDb such as Excel,Access and so on.Online Nuget package name is Joeries.NPoco.
 
 NPoco
 =====
