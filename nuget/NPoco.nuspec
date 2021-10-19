@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package >
+  <metadata>
+    <id>Joeries.NPoco</id>
+    <version>3.9.2</version>
+    <title>Joeries.NPoco</title>
+    <authors>Joeries</authors>
+    <owners>Joeries</owners>
+    <repository type="git" url="https://github.com/joeries/NPoco" />
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <license type="expression">MIT</license>
+    <projectUrl>https://github.com/joeries/NPoco</projectUrl>
+    <description>Updated from NPoco.Add OleDb Support and fix some other bugs.</description>
+    <releaseNotes></releaseNotes>
+    <copyright>Copyright © 2021</copyright>
+    <tags></tags>
+    <references>
+      <reference file="NPoco.dll" />
+    </references>
+  </metadata>
+</package>

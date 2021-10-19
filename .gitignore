@@ -2,7 +2,7 @@ build
 bin
 obj
 *.suo
-*.nupkg
+# *.nupkg
 *.user
 _ReSharper*
 src/TestResults
