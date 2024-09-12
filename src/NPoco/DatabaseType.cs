@@ -26,6 +26,7 @@ namespace NPoco
         public static DatabaseType SQLite { get { return Singleton<SQLiteDatabaseType>.Instance; } }
         public static DatabaseType SQLCe { get { return Singleton<SqlServerCEDatabaseType>.Instance; } }
         public static DatabaseType Firebird { get { return Singleton<FirebirdDatabaseType>.Instance; } }
+        public static DatabaseType OleDb { get { return Singleton<OleDbDatabaseType>.Instance; } }
 
         readonly Dictionary<Type, DbType> typeMap;
 
