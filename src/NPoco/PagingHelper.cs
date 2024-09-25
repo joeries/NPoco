@@ -46,7 +46,8 @@ namespace NPoco
                 parts.sqlUnordered = rxOrderBy.Replace(parts.sqlUnordered, "", 1, m.Index);
             }
 
-            parts.sqlCount = string.Format(@"SELECT COUNT(*) FROM ({0}) npoco_tbl", parts.sqlUnordered);
+            parts.sqlCount = rxColumns.Replace(parts.sqlUnordered, "SELECT COUNT(*) FROM");
+            //parts.sqlCount = string.Format(@"SELECT COUNT(*) FROM ({0}) npoco_tbl", parts.sqlUnordered);
 
             return true;
         }
