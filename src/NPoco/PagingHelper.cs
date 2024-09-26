@@ -8,6 +8,7 @@ namespace NPoco
     {
         public static Regex rxColumns = new Regex(@"\A\s*SELECT\s+((?:\((?>\((?<depth>)|\)(?<-depth>)|.?)*(?(depth)(?!))\)|.)*?)(?<!,\s+)\bFROM\b", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.Singleline | RegexOptions.Compiled);
         public static Regex rxOrderBy = new Regex(@"(?!.*(?:\s+FROM[\s\(]+))ORDER\s+BY\s+([\w\.\[\]\(\)\s""`,]+)(?!.*\))", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.Singleline | RegexOptions.Compiled);
+        public static Regex rxGroupBy = new Regex(@"GROUP\s+BY", RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.Singleline | RegexOptions.Compiled);
 
         public struct SQLParts
         {
@@ -26,7 +27,7 @@ namespace NPoco
             parts.sqlCount = null;
             parts.sqlOrderBy = null;
             parts.sqlUnordered = sql.Trim().Trim(';');
-            parts.sqlColumns = "*";
+            parts.sqlColumns = " * ";
 
             // Extract the columns from "SELECT <whatever> FROM"
             var m = rxColumns.Match(sql);
@@ -46,8 +47,14 @@ namespace NPoco
                 parts.sqlUnordered = rxOrderBy.Replace(parts.sqlUnordered, "", 1, m.Index);
             }
 
-            parts.sqlCount = rxColumns.Replace(parts.sqlUnordered, "SELECT COUNT(*) FROM");
-            //parts.sqlCount = string.Format(@"SELECT COUNT(*) FROM ({0}) npoco_tbl", parts.sqlUnordered);
+            if (rxGroupBy.IsMatch(parts.sqlUnordered))
+            {
+                parts.sqlCount = string.Format(@"SELECT COUNT(*) FROM ({0}) npoco_tbl", parts.sqlUnordered);
+            }
+            else
+            {
+                parts.sqlCount = rxColumns.Replace(parts.sqlUnordered, "SELECT COUNT(*) FROM");
+            }
 
             return true;
         }
